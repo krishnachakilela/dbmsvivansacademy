@@ -1,0 +1,167 @@
+create table Firm(Firm_ID integer primary key,city varchar(45),state varchar(45), pincode integer);
+
+create table Teacher(Tec_ID integer primary key,name varchar(45),phone_no integer,city varchar(45),state varchar(45),pincode integer,subject varchar(45),firm_id integer);
+
+create table Student(Stu_ID integer primary key,cname varchar(45),fname varchar(45),phone_no integer,tenth_marks integer,Inter_marks integer,email_ID varchar(45),group1 varchar(45),preferred_college varchar(45),city varchar(45),state varchar(45),pincode integer,firm_id integer);
+
+create table Staff(S_ID integer primary key,name varchar(45),street varchar(45),city varchar(45),state varchar(45),pincode integer);
+
+create table Receptionists(S_ID integer,name varchar(45),street varchar(45),city varchar(45),state varchar(45),pincode integer);
+
+create table Representatives(S_ID integer,name varchar(45),street varchar(45),city varchar(45),state varchar(45),pincode integer);
+
+create table Telecaller(S_ID integer,name varchar(45),street varchar(45),city varchar(45),state varchar(45),pincode integer);
+
+create table Neet_Academy(NEET_CLGID integer primary key,name varchar(45),street varchar(45),city varchar(45),state varchar(45),pincode integer,term int);
+
+create table college(clg_ID integer primary key,name varchar(45),street varchar(45),city varchar(45),state varchar(45),pincode integer,firm_ID integer); 
+
+create table parent(P_ID integer primary key,name varchar(45),phone_no integer,street varchar(45),city varchar(45),state varchar(45),pincode integer,email varchar(45));
+
+create table Intereact(Stud_ID integer not null,Tele_ID integer,Dcall date,phone integer);
+
+create table coaching(C_NO integer primary key,start_date date,end_date varchar(45),course varchar(45),fees integer,NEET_CLGID integer);
+
+create table Rep_enquiry(Stu_ID integer,S_ID integer);
+
+create table Rec_enquiry(P_ID integer,S_ID integer);
+
+create table Tele_enquiry(Firm_ID integer,S_ID integer);
+
+alter table teacher add constraint firm_id_fk1 foreign key(firm_Id) references Firm(firm_ID);
+
+alter table student add constraint firm_id_fk2 foreign key(Firm_ID) references Firm(firm_ID);
+
+alter table Receptionists add constraint firm_id_fk3 foreign key(S_ID) references Staff(S_ID);
+
+alter table Representatives add constraint firm_id_fk4 foreign key(S_ID) references Staff(S_ID);
+
+alter table college add constraint firm_id_fk5 foreign key(Firm_ID) references Firm(firm_ID);
+
+alter table coaching add constraint NEET_CLGID_fk6 foreign key(NEET_CLGID) references Neet_Academy(NEET_CLGID);
+
+alter table Rep_enquiry add constraint Stu_ID_fk7 foreign key(Stu_ID) references Student(Stu_ID);
+
+alter table Rep_enquiry add constraint S_ID_fk8 foreign key(S_ID) references Staff(S_ID);
+
+alter table Rec_enquiry add constraint P_ID_fk9 foreign key(P_ID) references parent(P_ID);
+
+alter table Rec_enquiry add constraint Rec_ID_fk10 foreign key(S_ID) references Staff(S_ID);
+
+alter table tele_enquiry add constraint P_ID_fk11 foreign key(S_ID) references  staff(S_ID);
+
+alter table tele_enquiry add constraint Firm_ID_fk12 foreign key(Firm_ID) references Firm(Firm_ID);
+---------------------------------------------------------------------------------
+firm values
+insert into firm values(1,'vijayawada','andhrapradesh',520010);
+insert into firm values(2,'hyderabad','telangana',520110);
+insert into firm values(3,'vijayawada','andhrapradesh',520011);
+insert into firm values(4,'vijayawada','andhrapradesh',521110);
+-----------------------------------------------------------------------------------
+Teacher values 
+
+
+insert into teacher values(1,'hari',987543210,'vijayawada','andhrapradesh',520010,'english',1);
+insert into teacher values(2,'kiran',986545310,'khamam','telangana',520010,'maths',2);
+insert into teacher values(3,'prasad',987654380,'vijayawada','andhrapradesh',521010,'physics',4);
+insert into teacher values(4,'satyakalyan',936543210,'vijayawada','andhrapradesh',521010,'chemistry',3);
+insert into teacher values(5,'harisimha',987233210,'vijayawada','andhrapradesh',520010,'science',1);
+
+
+---------------------------------------------------------------------------------------------------------------------
+Student values 
+
+insert into student values(170030184,'krishna','srinivas',9491506851,8,917,'Krishnachakilela@gmail.com','CSE','KLU','Hyderabad','Telangana',522102,1);
+insert into student values(170030159,'Shasshank','janardhan',9640036198,8,828,'shashankbompally@gmail.com','CSE','KLU','vijayawada','Andhra pradesh',522103,2);
+insert into student values(170030506,'Vignesh','Gandadhar',7299061009,7,942,'Kailaswarsaivignesh@gmail.com','CSE','KLU','Adilabad','Telangana',522104,3);
+insert into student values(170030198,'Nitheesh','shiva reddy',8978911446,8,870,'nithesshreddy010@gmail.com','CSE','KLU','Kurnool','Andhra pradesh',533103,1);
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+staff values
+
+insert into staff values(100,'anusha','Hanuman nagar','rajahmundry','andhra pradesh',533103);
+insert into staff values(101,'chandu','vaddeswaram,','ravulapalem','andhra pradesh',533104);
+insert into staff values(102,'prem','ntr circle','guntur','andhra pradesh',533105);
+insert into staff values(103,'sai','butchayya nagar','kovvur','andhra pradesh',533104);
+insert into staff values(104,'sana','benz circle','vijayawada','andhra pradesh',533106);
+insert into staff values(105,'satya','Auto nagar','ravulapalem','andhra pradesh',533104);
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+Receptionists
+
+insert into Receptionists values(100,'anusha','Hanuman nagar','rajahmundry','andhra pradesh',533103);
+insert into receptionists values(101,'chandu','vaddeswaram','ravulapalem','andhra pradesh',533104);
+-------------------------------------------------------------------------------------------------------------------------
+Representatives
+
+insert into Representatives values(102,'prem','ntr circle','guntur','andhra pradesh',533105);
+insert into representatives values(103,'sai','butchayya nagar','kovvur','andhra pradesh',533104);
+---------------------------------------------------------------------------------------------------------------------
+Telecaller
+
+insert into Telecaller values(104,'sana','benz cirle','vijayawada','andhra pradesh',533106);
+insert into Telecaller values(105,'satya','Auto nagar','ravulapalem','andhra pradesh',533104);
+
+----------------------------------------------------------------------------------------------------------------------
+college
+
+insert into college values(1000,'kluniversity','vaddeswaram','guntur','andhra pradesh',533105,1);
+insert into college values(1001,'kiet','koranki','kakinada','andhra pradesh',533605,2);
+insert into college values(1002,'giet','talapularev','miriyalguda','telangana',533606,1);
+insert into college values(1003,'adithya','tirumalai','tirupathi','andhra pradesh',533607,3);
+
+-------------------------------------------------------------------------------------------------------------
+PARENT
+
+insert into parent values(90,'pavan',850010225,'vaddeswaram','guntur','andhra pradesh',533105,'pavan@gmail.com');
+insert into parent values(91,'mani',850010335,'koranki','kakinada','andhra pradesh',533605,'mani@gmail.com');
+insert into parent values(92,'venkat',850010775,'talapularev','miriyalguda','telangana',533606,'venkat@gmail.com');
+insert into parent values(93,'kumar',850008835,'tirumalai','tirupathi','andhra pradesh',533607,'kumar@gmail.com');
+-----------------------------------------------------------------------------------------------------------------------
+Neet_Academy
+
+insert into Neet_Academy values(150,'rao_neet_academy','ashoknagar','vijayawada','andhrapradesh',520010,1);
+insert into Neet_Academy values(151,'raj_neet_academy','ramnagar','hyderabad','telangana',520110,2);
+
+----------------------------------------------------------------------------------------------------------------------------
+coaching
+
+insert into coaching values(33,date '2015-06-21',date '2017-06-21','english',1500,150);
+insert into coaching values(34,date '2015-07-21',date '2017-07-21','speaking',1400,151);
+insert into coaching values(35,date '2015-08-21',date '2017-08-21','maths',1800,150);
+insert into coaching values(36,date '2015-09-21',date '2017-09-21','chemistry',1600,151);
+------------------------------------------------------------------------------------------------------------------------------
+Intereact
+
+insert into Intereact values(170030184,300,date '2019-04-15',98765321);
+insert into Intereact values(170030506,301,date '2019-03-5',7299061006);
+insert into Intereact values(150030198,303,date '2019-02-25',8978911446);
+insert into Intereact values(170030159,302,date '2019-02-15',9640036198);
+--------------------------------------------------------------------------------------------------------------------------------
+Rep_enquiry
+
+insert into  Rep_enquiry values(170030184,103);
+insert into  Rep_enquiry values(170030506,102);
+insert into  Rep_enquiry values(170030198,102);
+insert into  Rep_enquiry values(170030159,102);
+
+-----------------------------------------------------------------------------------------------------------------------------------
+Rec_enquiry
+
+insert into  Rec_enquiry values(90,101);
+insert into  Rec_enquiry values(91,100);
+insert into  Rec_enquiry values(92,100);
+insert into  Rec_enquiry values(93,101);
+----------------------------------------------------------------------------------------------------------------------------
+Tele_enquiry
+
+insert into  Tele_enquiry values(1,104);
+insert into  Tele_enquiry values(1,105);
+insert into  Tele_enquiry values(3,104);
+insert into  Tele_enquiry values(2,105);
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+
+
+
